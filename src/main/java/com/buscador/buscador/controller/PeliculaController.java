@@ -52,4 +52,13 @@ public class PeliculaController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/buscar")
+    public List<Pelicula> buscarPeliculas(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String director,
+            @RequestParam(required = false) Integer anio
+    ) {
+        return peliculaService.buscarPorFiltros(titulo, director, anio);
+    }
 }

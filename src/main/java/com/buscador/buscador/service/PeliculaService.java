@@ -31,4 +31,18 @@ public class PeliculaService {
     public void eliminar(Long id) {
         peliculaRepository.deleteById(id);
     }
+
+    public List<Pelicula> buscarPorFiltros(String titulo, String director, Integer anio) {
+        if (titulo != null && director != null && anio != null) {
+            return peliculaRepository.findByTituloContainingIgnoreCaseAndDirectorContainingIgnoreCaseAndAnio(titulo, director, anio);
+        } else if (titulo != null) {
+            return peliculaRepository.findByTituloContainingIgnoreCase(titulo);
+        } else if (director != null) {
+            return peliculaRepository.findByDirectorContainingIgnoreCase(director);
+        } else if (anio != null) {
+            return peliculaRepository.findByAnio(anio);
+        } else {
+            return peliculaRepository.findAll();
+        }
+    }
 }
